@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beckon Consulting | 中小企業向けAI活用支援</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===========================
+       Reset & Variables
+    =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0d1b3e;
+      --navy-mid:   #162447;
+      --navy-light: #1e3a6e;
+      --gold:       #c9a84c;
+      --gold-light: #e4c46e;
+      --gold-pale:  #f5e8c0;
+      --white:      #ffffff;
+      --gray-light: #f7f8fc;
+      --gray:       #6b7280;
+      --text:       #1a1a2e;
+      --radius:     8px;
+      --shadow:     0 4px 24px rgba(13,27,62,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===========================
+       Utility
+    =========================== */
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .section-lead {
+      color: var(--gray);
+      font-size: 1.05rem;
+      max-width: 620px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      border: 2px solid transparent;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .btn-gold:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(201,168,76,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--gold);
+    }
+    .btn-outline:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    /* ===========================
+       Header / Nav
+    =========================== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 27, 62, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .logo-wrap img {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      padding: 8px 22px;
+      border-radius: var(--radius);
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* ===========================
+       Hero
+    =========================== */
+    #hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1a3a70 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 68px;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,58,110,0.6) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 80px 0;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.35);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 99px;
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 24px;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.72);
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin-bottom: 40px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      flex-wrap: wrap;
+    }
+
+    .stat-item { text-align: left; }
+
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 4px;
+    }
+
+    /* ===========================
+       Section Common
+    =========================== */
+    section { padding: 96px 0; }
+
+    /* ===========================
+       Services
+    =========================== */
+    #services { background: var(--gray-light); }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .services-header .section-lead {
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--gold);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(13,27,62,0.15);
+    }
+
+    .service-icon {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+
+    .service-tag {
+      display: inline-block;
+      margin-top: 16px;
+      background: var(--gold-pale);
+      color: #7a5c1e;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+
+    /* ===========================
+       Steps
+    =========================== */
+    #steps { background: var(--white); }
+
+    .steps-header { margin-bottom: 56px; }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .steps-list::before {
+      content: '';
+      position: absolute;
+      left: 28px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.15));
+    }
+
+    .step-item {
+      display: flex;
+      gap: 28px;
+      padding: 28px 0;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      min-width: 58px; height: 58px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 3px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--gold);
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-content h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .step-content p {
+      font-size: 0.92rem;
+      color: var(--gray);
+    }
+
+    /* ===========================
+       Profile
+    =========================== */
+    #profile { background: var(--navy); }
+
+    .profile-inner {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .profile-photo {
+      position: relative;
+    }
+
+    .profile-photo-wrap {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 4px solid rgba(201,168,76,0.6);
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    }
+
+    .profile-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .profile-badge {
+      position: absolute;
+      bottom: -16px; right: -16px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+    }
+
+    .profile-info .section-title { color: var(--white); }
+    .profile-info .section-label { margin-bottom: 6px; }
+
+    .profile-name {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .profile-role {
+      font-size: 0.9rem;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .profile-bio {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin-bottom: 28px;
+    }
+
+    .profile-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .profile-tag {
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 99px;
+    }
+
+    .career-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .career-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .career-item::before {
+      content: '';
+      min-width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 8px;
+    }
+
+    /* ===========================
+       Contact
+    =========================== */
+    #contact { background: var(--gray-light); }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 16px;
+      line-height: 1.35;
+    }
+
+    .contact-info p {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--navy);
+    }
+
+    .contact-detail-icon {
+      width: 38px; height: 38px;
+      background: var(--navy);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* Form */
+    .contact-form {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 7px;
+    }
+
+    .form-group label .req {
+      color: var(--gold);
+      margin-left: 4px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #d1d5db;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(13,27,62,0.08);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--navy);
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s;
+      letter-spacing: 0.04em;
+    }
+
+    .form-submit:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* ===========================
+       CTA Banner
+    =========================== */
+    #cta {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      padding: 72px 0;
+      text-align: center;
+    }
+
+    #cta h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    #cta h2 span { color: var(--gold); }
+
+    #cta p {
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 36px;
+    }
+
+    /* ===========================
+       Footer
+    =========================== */
+    footer {
+      background: #080f1f;
+      padding: 40px 0 24px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-logo img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .footer-logo-text {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .footer-logo-text span { color: var(--gold); }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.8rem;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* ===========================
+       Toast
+    =========================== */
+    #toast {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      background: var(--navy);
+      color: var(--white);
+      border-left: 4px solid var(--gold);
+      padding: 16px 24px;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ===========================
+       Responsive
+    =========================== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-title { font-size: 2rem; }
+      .hero-stats { gap: 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .profile-inner { grid-template-columns: 1fr; }
+      .profile-photo-wrap { max-width: 220px; margin: 0 auto; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 28px 20px; }
+      section { padding: 64px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===========================
+     Header
+=========================== -->
+<header>
+  <nav class="container">
+    <div class="logo-wrap">
+      <img src="beckon_logo.png" alt="Beckon Consulting">
+    </div>
+    <ul class="nav-links">
+      <li><a href="#services">サービス</a></li>
+      <li><a href="#steps">支援の流れ</a></li>
+      <li><a href="#profile">プロフィール</a></li>
+      <li><a href="#contact" class="nav-cta">お問い合わせ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ===========================
+     Hero
+=========================== -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">✦ AI Consulting for SMEs</div>
+      <h1 class="hero-title">
+        中小企業の<em>AI活用</em>を、<br>
+        実践的にサポートします。
+      </h1>
+      <p class="hero-sub">
+        「AIを導入したいが、何から始めればいいかわからない」<br>
+        そのお悩み、Beckon Consulting が伴走して解決します。
+        現場に根ざした支援で、確かな成果へ。
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-gold">無料相談を申し込む</a>
+        <a href="#services" class="btn btn-outline">サービスを見る</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">支援企業数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">93%</div>
+          <div class="stat-label">顧客満足度</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10年</div>
+          <div class="stat-label">AI・DX支援の実績</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     Services
+=========================== -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <p class="section-label">Services</p>
+      <h2 class="section-title">サービス内容</h2>
+      <p class="section-lead">
+        中小企業が抱えるAI活用の課題に、戦略立案から現場実装・定着まで一気通貫でお応えします。
+      </p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>AI活用診断・戦略立案</h3>
+        <p>現状の業務フローを分析し、AI導入で最も効果が出る領域を特定。費用対効果を考慮した段階的な導入ロードマップを策定します。</p>
+        <span class="service-tag">初回無料</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">⚙️</div>
+        <h3>生成AI ツール導入支援</h3>
+        <p>ChatGPT・Copilot・Claude などの生成AIを業務に組み込むための設計・設定・社内ルール整備まで丁重にサポートします。</p>
+        <span class="service-tag">月次契約可</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>社内研修・ワークショップ</h3>
+        <p>従業員がAIツールを安全・効果的に使いこなすための実践的な研修を提供。プロンプトエンジニアリングの基礎から応用まで対応。</p>
+        <span class="service-tag">オンライン・対面</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <h3>業務自動化・AI開発</h3>
+        <p>定型業務の自動化、社内データを活用したチャットボット構築、業務特化型AIシステムの開発をワンストップで提供します。</p>
+        <span class="service-tag">カスタム開発</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🛡️</div>
+        <h3>AI ガバナンス・リスク管理</h3>
+        <p>情報漏洩・著作権・ハルシネーションなどのリスクを整理し、安心してAIを使える社内規定・運用フローの整備を支援します。</p>
+        <span class="service-tag">法令対応</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>効果測定・継続改善</h3>
+        <p>導入後のKPI追跡・定期レビューを通じて、AI活用の効果を可視化。継続的な改善提案で投資対効果を最大化します。</p>
+        <span class="service-tag">伴走型支援</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     Steps
+=========================== -->
+<section id="steps">
+  <div class="container">
+    <div class="steps-header">
+      <p class="section-label">Process</p>
+      <h2 class="section-title">支援の流れ</h2>
+    </div>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>無料相談（オンライン 60分）</h3>
+          <p>まず現状のお悩みや課題をヒアリング。AI活用の方向性と期待できる効果を一緒に整理します。費用は一切かかりません。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>現状分析・診断レポート提出</h3>
+          <p>業務フローや既存システムを調査し、AI活用の優先領域・リスク・ロードマップをレポートにまとめてご提案します。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>支援プランのご提案・契約</h3>
+          <p>スポット支援・月次顧問・プロジェクト型など、貴社の予算・規模・目的に合ったプランをご提案します。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>導入・実装・研修</h3>
+          <p>ツールの設定・カスタマイズ、社内ルール整備、従業員向け研修を並行して進め、現場に即した形で導入します。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h3>定着・改善フォロー</h3>
+          <p>定期的なレビューで効果を測定し、改善提案を継続。現場に根付くAI活用を長期的にサポートします。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     Profile
+=========================== -->
+<section id="profile">
+  <div class="container">
+    <div class="profile-inner">
+      <div class="profile-photo">
+        <div class="profile-photo-wrap">
+          <img src="profile.png" alt="プロフィール写真">
+        </div>
+        <div class="profile-badge">代表コンサルタント</div>
+      </div>
+      <div class="profile-info">
+        <p class="section-label">Profile</p>
+        <div class="profile-name">山田 太郎</div>
+        <div class="profile-role">代表 / AIコンサルタント</div>
+        <p class="profile-bio">
+          大手IT企業でのシステムエンジニア・プロダクトマネージャー経験を経て独立。中小企業・スタートアップへのDX・AI導入支援に特化したコンサルティングを展開。「現場で動くAI」をモットーに、技術と経営の橋渡し役として活動中。
+          <br><br>
+          ChatGPT / Claude / Azure OpenAI Service をはじめとした生成AIツールの業務活用支援を得意とし、製造業・小売業・サービス業など幅広い業種での実績を持つ。
+        </p>
+        <div class="profile-tags">
+          <span class="profile-tag">生成AI活用</span>
+          <span class="profile-tag">DX戦略</span>
+          <span class="profile-tag">プロセス改善</span>
+          <span class="profile-tag">社内研修設計</span>
+          <span class="profile-tag">中小企業支援</span>
+        </div>
+        <div class="career-list">
+          <div class="career-item">大手SIerにてエンタープライズ向けシステム開発・PM（10年）</div>
+          <div class="career-item">スタートアップCTOとしてAIプロダクト開発をリード（3年）</div>
+          <div class="career-item">独立後、50社以上の中小企業のAI活用を支援</div>
+          <div class="career-item">中小企業診断士・G検定取得</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     CTA Banner
+=========================== -->
+<section id="cta">
+  <div class="container">
+    <h2>まず、<span>無料相談</span>から始めましょう。</h2>
+    <p>「何から手を付ければいいか分からない」でも大丈夫です。一緒に考えましょう。</p>
+    <a href="#contact" class="btn btn-gold">今すぐ相談を申し込む</a>
+  </div>
+</section>
+
+<!-- ===========================
+     Contact
+=========================== -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <p class="section-label">Contact</p>
+        <h2>お問い合わせ</h2>
+        <p>
+          サービスのご相談、料金のご質問など、お気軽にご連絡ください。
+          通常2営業日以内にご返信いたします。
+        </p>
+        <div class="contact-detail">
+          <div class="contact-detail-item">
+            <div class="contact-detail-icon">📧</div>
+            <span>info@beckon-consulting.jp</span>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-icon">📞</div>
+            <span>03-0000-0000（平日 10:00〜18:00）</span>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-icon">📍</div>
+            <span>東京都千代田区（オンライン対応可）</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>お名前 <span class="req">*</span></label>
+              <input type="text" name="name" placeholder="山田 太郎" required>
+            </div>
+            <div class="form-group">
+              <label>会社名</label>
+              <input type="text" name="company" placeholder="株式会社〇〇">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>メールアドレス <span class="req">*</span></label>
+            <input type="email" name="email" placeholder="example@company.co.jp" required>
+          </div>
+          <div class="form-group">
+            <label>電話番号</label>
+            <input type="tel" name="tel" placeholder="03-0000-0000">
+          </div>
+          <div class="form-group">
+            <label>お問い合わせ種別 <span class="req">*</span></label>
+            <select name="type" required>
+              <option value="" disabled selected>選択してください</option>
+              <option>無料相談の申し込み</option>
+              <option>サービス内容について</option>
+              <option>料金・プランについて</option>
+              <option>研修・ワークショップについて</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>お問い合わせ内容 <span class="req">*</span></label>
+            <textarea name="message" placeholder="ご相談内容をご記入ください。" required></textarea>
+          </div>
+          <button type="submit" class="form-submit">送信する →</button>
+          <p class="form-note">※ 送信いただいた情報は、ご返答以外の目的には使用しません。</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     Footer
+=========================== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="beckon_logo.png" alt="Beckon Consulting">
+      </div>
+      <ul class="footer-links">
+        <li><a href="#services">サービス</a></li>
+        <li><a href="#steps">支援の流れ</a></li>
+        <li><a href="#profile">プロフィール</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <p class="footer-copy">&copy; 2026 Beckon Consulting. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Toast notification -->
+<div id="toast">✅ お問い合わせを受け付けました。2営業日以内にご連絡いたします。</div>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn  = form.querySelector('.form-submit');
+
+    btn.textContent = '送信中…';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      form.reset();
+      btn.textContent = '送信する →';
+      btn.disabled = false;
+      showToast();
+    }, 1000);
+  }
+
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 100) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--gold)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
